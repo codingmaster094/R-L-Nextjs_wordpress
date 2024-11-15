@@ -250,6 +250,11 @@ header {
   justify-content: space-between;
   overflow: hidden;
 }
+
+.navigtion img{
+  width:20px;
+  height:20px;
+}
 /* .fancybox__slide{
   overflow: visible !important;
 } */
@@ -271,6 +276,10 @@ header {
   z-index: 9;
 }
 
+.h-wrapper .DownArrow{
+width:7px;
+height:4px;
+}
 .h-wrapper.sticky {
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
       rgb(16, 39, 29, 0.23) 0px 6px 6px;
@@ -432,6 +441,10 @@ header .tel-info .mail a:hover {
   gap: 48px;
 }
 
+.search-btn img{
+  width:24px;
+ height:24px;
+}
 .h-btn .search {
   position: relative;
 }
@@ -468,6 +481,10 @@ header .tel-info .mail a:hover {
   overflow: hidden;
 }
 
+.hero .hero-btn img{
+  width: 22px;
+  height: 22px;
+}
 .hero-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -935,6 +952,10 @@ header .tel-info .mail a:hover {
   flex-wrap: wrap;
 }
 
+.skill-team-btn-box img{
+  width:22px;
+  height:22px;
+}
 .skill-team-btn-box .user {
   display: flex;
   align-items: center;
@@ -1139,6 +1160,10 @@ header .tel-info .mail a:hover {
   flex-wrap: wrap;
 }
 
+.form-info .icon img{
+  width :30px;
+  height :30px;
+}
 .form-info .call {
   display: flex;
   align-items: center;
@@ -1279,6 +1304,10 @@ header .tel-info .mail a:hover {
   justify-content: center;
 }
 
+.noti-icon-b img{
+  width:24px;
+  height:24px
+}
 .noti-ball p {
   font-family: var(--heading-font);
   text-transform: uppercase;
@@ -1353,6 +1382,37 @@ footer {
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
+}
+
+
+.copy-link {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.copy-link a{
+  color: var(--black-color);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+.copy-link a::after {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 1px;
+  background-color: var(--black-color);
+  top: 55%;
+  transform: translateY(-50%);
+  left: -9px;
+}.copy-link  .menu-footer-menu-1-container ul {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}.copy-link  .menu-footer-menu-1-container ul li {
+  margin: 0;
+}
+.copy-link a:hover{
+  color: var(--primary-color);
 }
 
 .copy-right-wrapper p {
@@ -1604,6 +1664,10 @@ footer {
   gap: 24px;
 }
 
+.order-btn img{
+  width:22px;
+  height: 22px;
+}
 .order-btn .btn-b {
   color: var(--primary-color);
   border-color: var(--primary-color);
@@ -2363,6 +2427,10 @@ section.news-letter.indeurtries-nl {
   justify-content: start;
 }
 
+.about-team-text .btn img{
+  width:22px;
+  height:22px;
+}
 .about-team,
 .faq-tabs-section,
 .contact-tab-form {
@@ -2522,7 +2590,7 @@ section.news-letter.indeurtries-nl {
 .privacy-content,
 .privacy-sub-text,
 .privacy-sub {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   gap: 64px;
 }
@@ -2658,6 +2726,41 @@ span.wpcf7-not-valid-tip {
     width: 3810px !important;
 } */
 
+
+.privacy-sub-text a {
+  color: var(--primary-color) !important;
+}
+.privacy-content {
+  padding-top: 100px;
+}
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.privacy-content .title .tag {
+  justify-content: start;
+}
+
+.privacy-sub-text h3:not(:first-child) {
+  margin-top: 48px;
+}
+.privacy-sub-text h3 {
+  margin-bottom: 24px;
+}
+.privacy-sub-text h3 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 34px;
+}
+
+.privacy-content .title h1 {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 75px;
+}
 @media(max-width:1950px) {
   .ser-banner::after {
       width: 70%;

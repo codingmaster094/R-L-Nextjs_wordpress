@@ -1,61 +1,4 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-
-const TopButton = () => {
-  const [visible, setVisible] = useState(false);
-
-  const toggleVisibility = () => {
-    setVisible(window.scrollY > 100);
-  };
-
-  const scrollToTop = () => {
-    const scrollTo = (target, duration) => {
-      const start = window.scrollY; 
-      const change = target - start; 
-      const increment = 20; 
-      let currentTime = 0;
-
-      const animateScroll = () => {
-        currentTime += increment; 
-        const val = easeInOutQuad(currentTime, start, change, duration);
-        window.scrollTo(0, val); 
-        if (currentTime < duration) {
-          requestAnimationFrame(animateScroll); 
-        }
-      };
-
-      const easeInOutQuad = (t, b, c, d) => {
-        t /= d / 2; 
-        if (t < 1) return (c / 2) * t * t + b; 
-        t--; 
-        return (-c / 2) * (t * (t - 2) - 1) + b; 
-      };
-
-      animateScroll(); 
-    };
-
-    scrollTo(0, 600); 
-  };
-
-  useEffect(() => {
-    
-    window.addEventListener('scroll', toggleVisibility);
-    return () => {
-      
-      window.removeEventListener('scroll', toggleVisibility);
-    };
-  }, []);
-
-  return (
-    <button
-    id="back-to-top"
-      onClick={scrollToTop}
-       style={{
-        display: visible ? 'block' : 'none', 
-       }}
-      aria-label="Back to top" 
-    >
-     <svg
+<svg
           width="19"
           height="12"
           viewBox="0 0 19 12"
@@ -68,8 +11,3 @@ const TopButton = () => {
             fill="white"
           ></path>
         </svg>
-    </button>
-  );
-};
-
-export default TopButton;

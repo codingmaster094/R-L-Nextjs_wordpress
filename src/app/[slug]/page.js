@@ -7,6 +7,7 @@ import About from "@/app/[slug]/About"
 import Industries from "@/app/[slug]/Industries"
 import Faq from "@/app/[slug]/Faq"   
 import Contact from "@/app/[slug]/Contact"   
+import Privacy_policy from "@/app/[slug]/Privacy_policy"   
 import  Home  from '@/app/home/home';
 const Page = () => {
     const router = useParams();
@@ -26,6 +27,8 @@ const Page = () => {
         setCurrentPage(<Faq />);
     }else if(slug === 'contact') {
         setCurrentPage(<Contact />);
+    }else if(slug === 'privacy-policy') {
+      setCurrentPage(<Privacy_policy />);
     }else {
       setCurrentPage(<Home />);
     }
