@@ -25,29 +25,6 @@ const Page = () => {
       }, [slug]);
   return (
     <>
-        {/* <section className="contact-banner">
-            <div className="container">
-                <div className="contact-bg-wrapper">
-                    <div className="sub-banner-wrapper about-banner-wrapper">
-                        <div className="tag">
-                            <div className="tag-a">
-                                <div className="box"></div>
-                                <div className="box"></div>
-                                <div className="box"></div>
-                            </div>
-                            <span>dummy text</span>
-                            <div className="tag-b">
-                                <div className="box"></div>
-                                <div className="box"></div>
-                                <div className="box"></div>
-                            </div>
-                        </div>
-                        <h1>contact us</h1>
-                    </div>
-                </div>
-            </div>
-        </section> */}
-
         <section className="contact-tab-form py">
             <div className="container">
                 <div className="tabs contact-tabs">

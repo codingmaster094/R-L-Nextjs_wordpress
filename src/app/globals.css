@@ -1863,7 +1863,7 @@ footer {
 
 .pr-form-wrapper {
   display: flex;
-  align-items: start;
+  /* align-items: start; */
   gap: 48px;
   flex-wrap: wrap;
 }

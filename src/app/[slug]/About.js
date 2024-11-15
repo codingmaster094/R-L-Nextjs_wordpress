@@ -8,12 +8,18 @@ import HeroSection from "../../../component/HeroSection";
 
 const Page = () => {
   const [about, setabout] = useState(null);
+  const [Newslater, setNewslater] = useState(null);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState('');
+  const [activeTab, setActiveTab] = useState("");
 
   useEffect(() => {
-    if (about?.about_all_specialties_2 && about.about_all_specialties_2.length > 0) {
-      setActiveTab(about.about_all_specialties_2[0].about_all_specialties_2_title);
+    if (
+      about?.about_all_specialties_2 &&
+      about.about_all_specialties_2.length > 0
+    ) {
+      setActiveTab(
+        about.about_all_specialties_2[0].about_all_specialties_2_title
+      );
     }
   }, [about]);
 
@@ -25,12 +31,12 @@ const Page = () => {
   const router = useParams();
   const slug = router.slug;
 
-
   useEffect(() => {
     const loadHomeData = async () => {
       try {
         const result = await fetchHomedata(slug);
         setabout(result.page_acf_fields);
+        setNewslater(result.global_acf_options);
       } catch (err) {
         setError("Failed to load home page data.");
       }
@@ -44,18 +50,18 @@ const Page = () => {
 
   return (
     <>
-    <HeroSection  
-      bg_image={about?.about_hero_background_image.url}
-      main_title={about?.about_hero_main_title}
-      sub_title={about?.about_hero_sub_title}
-      content={about?.about_hero_content}
-      placeholder_title={about?.about_hero_placeholder_title}
-      about_hero_box_left_section={about?.about_hero_box_left_section}
-      about_hero_box_right_section={about?.about_hero_box_right_section}
-      about_hero_box_center_image={about?.about_hero_box_center_image}
-    />
+      <HeroSection
+        bg_image={about?.about_hero_background_image.url}
+        main_title={about?.about_hero_main_title}
+        sub_title={about?.about_hero_sub_title}
+        content={about?.about_hero_content}
+        placeholder_title={about?.about_hero_placeholder_title}
+        about_hero_box_left_section={about?.about_hero_box_left_section}
+        about_hero_box_right_section={about?.about_hero_box_right_section}
+        about_hero_box_center_image={about?.about_hero_box_center_image}
+      />
 
-<section className="about-us py">
+      <section className="about-us py">
         <div className="container">
           <div className="about-us-wrapper">
             <div className="tag">
@@ -76,7 +82,7 @@ const Page = () => {
             </h2>
 
             <div className="sub-text">
-            <p
+              <p
                 dangerouslySetInnerHTML={{
                   __html: about?.about_detail_content
                     ?.replace(/<p>/g, "")
@@ -90,7 +96,13 @@ const Page = () => {
 
       <section className="specialties-about py py-b">
         <div className="container">
-          <Image src={about?.about_specialties_background_image.url}  width={about?.about_specialties_background_image.width} height={about?.about_specialties_background_image.height} alt={about?.about_specialties_background_image.title} className="sp-about-bg"/>
+          <Image
+            src={about?.about_specialties_background_image.url}
+            width={about?.about_specialties_background_image.width}
+            height={about?.about_specialties_background_image.height}
+            alt={about?.about_specialties_background_image.title}
+            className="sp-about-bg"
+          />
           <div className="sp-about-wrapper">
             <div className="tag">
               <div className="tag-a">
@@ -112,34 +124,37 @@ const Page = () => {
                     .replace(/<\/p>/g, ""),
                 }}
               /> */}
-            <h2 dangerouslySetInnerHTML={{
-                  __html: about?.about_specialties_main_title}}>
-            </h2>
+            <h2
+              dangerouslySetInnerHTML={{
+                __html: about?.about_specialties_main_title,
+              }}
+            ></h2>
             <div className="sp-about-boxs">
-            {
-              about?.about_all_specialties &&
-              about?.about_all_specialties.map((val ,i ) => {
-                return (
-                  <div className="sp-about-box" key={i}>
-                <div className="sp-about-b">
-                  <div className="sp-about-icon" dangerouslySetInnerHTML={{
-                  __html: val.about_all_specialties_icon}}>
-                  </div>
-                  <div className="sp-title">
-                    <h3>{val.about_all_specialties_title}</h3>
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: val.about_all_specialties_content
-                          ?.replace(/<p>/g, "")
-                          .replace(/<\/p>/g, ""),
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-                )
-              })
-            }
+              {about?.about_all_specialties &&
+                about?.about_all_specialties.map((val, i) => {
+                  return (
+                    <div className="sp-about-box" key={i}>
+                      <div className="sp-about-b">
+                        <div
+                          className="sp-about-icon"
+                          dangerouslySetInnerHTML={{
+                            __html: val.about_all_specialties_icon,
+                          }}
+                        ></div>
+                        <div className="sp-title">
+                          <h3>{val.about_all_specialties_title}</h3>
+                          <p
+                            dangerouslySetInnerHTML={{
+                              __html: val.about_all_specialties_content
+                                ?.replace(/<p>/g, "")
+                                .replace(/<\/p>/g, ""),
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </div>
@@ -156,50 +171,62 @@ const Page = () => {
               </div>
               <span>{about?.about_specialties_2_sub_title}</span>
             </div>
-            <h2 dangerouslySetInnerHTML={{
-                  __html: about?.about_specialties_2_main_title
-                }}/>
-            <div className="tabs sp-tabs">
-      {/* Tab Links */}
-      <div className="tab-links">
-        {about?.about_all_specialties_2 &&
-          about.about_all_specialties_2.map((tab,i) => (
-            <a
-              key={tab.about_all_specialties_2_title}
-              href={`#${tab.about_all_specialties_2_title}`}
-              className={`tab-link ${activeTab === tab.about_all_specialties_2_title ? 'active' : ''}`}
-              onClick={(e) => {
-                e.preventDefault(); // Prevent default anchor behavior
-                handleTabClick(tab.about_all_specialties_2_title);
+            <h2
+              dangerouslySetInnerHTML={{
+                __html: about?.about_specialties_2_main_title,
               }}
-            >
-              {i+1}.{tab.about_all_specialties_2_title}
-            </a>
-          ))}
-      </div>
+            />
+            <div className="tabs sp-tabs">
+              {/* Tab Links */}
+              <div className="tab-links">
+                {about?.about_all_specialties_2 &&
+                  about.about_all_specialties_2.map((tab, i) => (
+                    <a
+                      key={tab.about_all_specialties_2_title}
+                      href={`#${tab.about_all_specialties_2_title}`}
+                      className={`tab-link ${
+                        activeTab === tab.about_all_specialties_2_title
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevent default anchor behavior
+                        handleTabClick(tab.about_all_specialties_2_title);
+                      }}
+                    >
+                      {i + 1}.{tab.about_all_specialties_2_title}
+                    </a>
+                  ))}
+              </div>
 
-      {/* Tab Content */}
-      <div className="tab-content">
-        {about?.about_all_specialties_2 &&
-          about.about_all_specialties_2.map((tab) => (
-            <div
-              key={tab.about_all_specialties_2_title}
-              id={tab.about_all_specialties_2_title}
-              className={`tab-pane ${activeTab === tab.about_all_specialties_2_title ? 'active' : ''}`}
-            >
-              <div className="tab-pane-b">
-                <div className="title">
-                  <h3>{tab.about_all_specialties_2_title}</h3>
-                </div>
-                <div
-                  className="sub-text"
-                  dangerouslySetInnerHTML={{ __html: tab.about_all_specialties_2_content }}
-                />
+              {/* Tab Content */}
+              <div className="tab-content">
+                {about?.about_all_specialties_2 &&
+                  about.about_all_specialties_2.map((tab) => (
+                    <div
+                      key={tab.about_all_specialties_2_title}
+                      id={tab.about_all_specialties_2_title}
+                      className={`tab-pane ${
+                        activeTab === tab.about_all_specialties_2_title
+                          ? "active"
+                          : ""
+                      }`}
+                    >
+                      <div className="tab-pane-b">
+                        <div className="title">
+                          <h3>{tab.about_all_specialties_2_title}</h3>
+                        </div>
+                        <div
+                          className="sub-text"
+                          dangerouslySetInnerHTML={{
+                            __html: tab.about_all_specialties_2_content,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
               </div>
             </div>
-          ))}
-      </div>
-    </div>
           </div>
         </div>
       </section>
@@ -215,11 +242,15 @@ const Page = () => {
               </div>
               <span>{about?.about_testimonial_sub_title}</span>
             </div>
-            <h2 dangerouslySetInnerHTML={{
-                  __html: about?.about_testimonial_main_title
-                }}/>
+            <h2
+              dangerouslySetInnerHTML={{
+                __html: about?.about_testimonial_main_title,
+              }}
+            />
           </div>
-          <Testimonial_Caraousel  AboutAllTestimonial={about?.about_all_testimonial}/>
+          <Testimonial_Caraousel
+            AboutAllTestimonial={about?.about_all_testimonial}
+          />
         </div>
       </section>
 
@@ -241,14 +272,18 @@ const Page = () => {
                   </div>
                   <span>{about?.about_team_sub_title}</span>
                 </div>
-                <h2 dangerouslySetInnerHTML={{
-              __html: about?.about_team_main_title}}>
-                </h2>
+                <h2
+                  dangerouslySetInnerHTML={{
+                    __html: about?.about_team_main_title,
+                  }}
+                ></h2>
               </div>
               <div className="sub-text">
-                <p dangerouslySetInnerHTML={{
-              __html: about?.about_team_content}}>
-                </p>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: about?.about_team_content,
+                  }}
+                ></p>
               </div>
               <a href={about?.about_team_button.url} className="btn">
                 {about?.about_team_button.title}
@@ -275,9 +310,282 @@ const Page = () => {
               </a>
             </div>
             <div className="about-team-img">
-              <Image src={about?.about_team_image.url}
-               width={about?.about_team_image.width} height={about?.about_team_image.height} alt={about?.about_team_image.title}
-                />
+              <Image
+                src={about?.about_team_image.url}
+                width={about?.about_team_image.width}
+                height={about?.about_team_image.height}
+                alt={about?.about_team_image.title}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pr-form py py-b"> 
+        <div class="container">
+          <div class="pr-form-wrapper">
+            <div class="cf-form">
+              <div class="tag">
+                <div class="tag-a">
+                  <div class="box"></div>
+                  <div class="box"></div>
+                  <div class="box"></div>
+                </div>
+                <span>Get In Touch</span> 
+              </div>{" "}
+              <h2>
+                Free <span>Consultation</span>
+              </h2>
+              <div class="wpcf7 js" id="wpcf7-f702-o1" lang="en-US" dir="ltr">
+                <div class="screen-reader-response">
+                  <p role="status" aria-live="polite" aria-atomic="true"></p>{" "}
+                  <ul></ul>
+                </div>
+                <form
+                  action="/about/#wpcf7-f702-o1"
+                  method="post"
+                  class="wpcf7-form init"
+                  aria-label="Contact form"
+                  novalidate="novalidate"
+                  data-status="init"
+                >
+                  <div style={{display: 'none'}}>
+                    <input type="hidden" name="_wpcf7" value="702" />
+                    <input type="hidden" name="_wpcf7_version" value="5.9.8" />
+                    <input type="hidden" name="_wpcf7_locale" value="en_US" />
+                    <input
+                      type="hidden"
+                      name="_wpcf7_unit_tag"
+                      value="wpcf7-f702-o1"
+                    />
+                    <input
+                      type="hidden"
+                      name="_wpcf7_container_post"
+                      value="0"
+                    />
+                    <input
+                      type="hidden"
+                      name="_wpcf7_posted_data_hash"
+                      value=""
+                    />
+                  </div>
+                  <div class="f-fild">
+                    <p>
+                      <span
+                        class="wpcf7-form-control-wrap"
+                        data-name="your-name"
+                      >
+                        <input
+                          size="40"
+                          maxlength="400"
+                          class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
+                          aria-required="true"
+                          aria-invalid="false"
+                          placeholder="Name"
+                          value=""
+                          type="text"
+                          name="your-name"
+                        />
+                      </span>
+                    </p>
+                  </div>
+                  <div class="f-fild">
+                    <p>
+                      <span
+                        class="wpcf7-form-control-wrap"
+                        data-name="your-email"
+                      >
+                        <input
+                          size="40"
+                          maxlength="400"
+                          class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email"
+                          aria-required="true"
+                          aria-invalid="false"
+                          placeholder="Email Address"
+                          value=""
+                          type="email"
+                          name="your-email"
+                        />
+                      </span>
+                    </p>
+                  </div>
+                  <div class="f-fild">
+                    <p>
+                      <span class="wpcf7-form-control-wrap" data-name="phone">
+                        <input
+                          size="40"
+                          maxlength="400"
+                          class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel"
+                          aria-required="true"
+                          aria-invalid="false"
+                          placeholder="Phone number"
+                          value=""
+                          type="tel"
+                          name="phone"
+                        />
+                      </span>
+                    </p>
+                  </div>
+                  <div class="f-fild">
+                    <p>
+                      <span class="wpcf7-form-control-wrap" data-name="message">
+                        <textarea
+                          cols="40"
+                          rows="4"
+                          maxlength="2000"
+                          class="wpcf7-form-control wpcf7-textarea"
+                          aria-invalid="false"
+                          placeholder="Message"
+                          name="message"
+                        ></textarea>
+                      </span>
+                    </p>
+                  </div>
+                  <div class="f-fild-btn">
+                    <p>
+                      <input
+                        class="wpcf7-form-control wpcf7-submit has-spinner btn"
+                        type="submit"
+                        value="Request Now"
+                      />
+                      <span class="wpcf7-spinner"></span>
+                    </p>
+                  </div>
+                  <div class="wpcf7-response-output" aria-hidden="true"></div>
+                </form>
+              </div>
+            </div>
+            <div class="pr-form-map">
+              <div class="map" dangerouslySetInnerHTML={{__html: Newslater?.single_footer_iframe_link}}></div>{" "}
+              <div class="pr-form-info form-info">
+                <div class="call">
+                  <div class="icon">
+                    <svg
+                      width="31"
+                      height="31"
+                      viewBox="0 0 31 31"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clip-path="url(#clip0_192_2808)">
+                        <path
+                          d="M15.5009 14.8715C18.2126 14.8715 20.4188 12.6657 20.4188 9.9543C20.4188 7.24293 18.2126 5.03711 15.5009 5.03711C12.7892 5.03711 10.583 7.24293 10.583 9.9543C10.583 12.6657 12.7892 14.8715 15.5009 14.8715ZM15.5009 6.79469C17.2434 6.79469 18.661 8.21213 18.661 9.9543C18.661 11.6965 17.2434 13.114 15.5009 13.114C13.7584 13.114 12.3408 11.6965 12.3408 9.9543C12.3408 8.21213 13.7584 6.79469 15.5009 6.79469Z"
+                          fill="#EE0000"
+                        ></path>
+                        <path
+                          d="M10.1453 18.7889C11.4775 20.5923 10.9423 19.891 14.7793 25.3692C15.128 25.869 15.8696 25.8714 16.2204 25.3699C20.0747 19.8657 19.5444 20.5629 20.8549 18.7889C22.1823 16.9917 23.555 15.1333 24.3073 12.9556C25.396 9.80322 24.9254 6.6841 22.9822 4.17277C22.9822 4.17277 22.9822 4.17272 22.9821 4.17272C21.2021 1.87297 18.4051 0.5 15.5001 0.5C12.5951 0.5 9.79804 1.87297 8.01802 4.17283C6.07488 6.68416 5.60425 9.80334 6.69304 12.9557C7.44515 15.1334 8.81788 16.9917 10.1453 18.7889ZM9.40822 5.24838C10.8577 3.37566 13.1351 2.25758 15.5001 2.25758C17.8651 2.25758 20.1425 3.37566 21.592 5.24838L21.5918 5.24832C23.1602 7.2752 23.5344 9.80867 22.6457 12.382C21.9813 14.3055 20.6898 16.0539 19.4409 17.7447C18.4684 19.0612 18.7595 18.6585 15.5001 23.3306C12.2441 18.6632 12.5314 19.0607 11.5593 17.7447C10.3104 16.0539 9.01892 14.3055 8.35452 12.382C7.46577 9.80861 7.83995 7.2752 9.40822 5.24838Z"
+                          fill="#EE0000"
+                        ></path>
+                        <path
+                          d="M10.8676 22.599C10.6084 22.1888 10.0655 22.0661 9.65516 22.3254L7.15614 23.9037C6.61098 24.248 6.61045 25.045 7.15614 25.3897L15.0311 30.3636C15.3178 30.5447 15.6832 30.5446 15.9699 30.3636L23.8449 25.3897C24.3901 25.0454 24.3906 24.2484 23.8449 23.9037L21.3458 22.3254C20.9353 22.0662 20.3926 22.1888 20.1334 22.599C19.8741 23.0094 19.9967 23.5521 20.4071 23.8113L21.7298 24.6467L15.5005 28.5812L9.27119 24.6467L10.5939 23.8113C11.0043 23.5522 11.1268 23.0094 10.8676 22.599Z"
+                          fill="#EE0000"
+                        ></path>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_192_2808">
+                          <rect
+                            width="30"
+                            height="30"
+                            fill="white"
+                            transform="translate(0.5 0.5)"
+                          ></rect>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                  <div class="call-info-text">
+                    <p>{Newslater?.single_footer_location_label}</p>
+                    <h3>{Newslater?.address.title}</h3>
+                  </div>
+                </div>{" "}
+                <div class="call">
+                  <div class="icon">
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 30 30"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clip-path="url(#clip0_86_3978)">
+                        <path
+                          d="M23.7095 18.583C23.0953 17.9435 22.3545 17.6016 21.5694 17.6016C20.7906 17.6016 20.0434 17.9372 19.4039 18.5767L17.4031 20.5712C17.2385 20.4826 17.0739 20.4002 16.9156 20.3179C16.6876 20.204 16.4723 20.0963 16.2887 19.9823C14.4145 18.792 12.7113 17.2407 11.0777 15.2336C10.2863 14.2332 9.75441 13.391 9.36817 12.5363C9.88737 12.0614 10.3686 11.5675 10.8371 11.0926C11.0144 10.9153 11.1917 10.7317 11.369 10.5544C12.6987 9.22478 12.6987 7.50256 11.369 6.1729L9.64044 4.44434C9.44415 4.24806 9.24154 4.04545 9.05159 3.84283C8.67169 3.45027 8.27279 3.04504 7.86123 2.66514C7.24705 2.05729 6.51258 1.73438 5.74011 1.73438C4.96764 1.73438 4.2205 2.05729 3.58733 2.66514C3.581 2.67147 3.581 2.67147 3.57466 2.6778L1.42188 4.84957C0.611426 5.66003 0.149212 6.64778 0.0479046 7.79382C-0.104056 9.64268 0.44047 11.3649 0.858363 12.4919C1.8841 15.2589 3.41637 17.8232 5.70212 20.5712C8.4754 23.8827 11.8122 26.4977 15.6239 28.3402C17.0802 29.0304 19.024 29.8471 21.1958 29.9864C21.3288 29.9928 21.4681 29.9991 21.5947 29.9991C23.0573 29.9991 24.2857 29.4736 25.2481 28.4288C25.2544 28.4162 25.2671 28.4098 25.2734 28.3972C25.6027 27.9983 25.9826 27.6374 26.3815 27.2511C26.6537 26.9915 26.9323 26.7193 27.2046 26.4344C27.8314 25.7822 28.1607 25.0224 28.1607 24.2436C28.1607 23.4585 27.8251 22.705 27.1856 22.0718L23.7095 18.583ZM25.9762 25.2503C25.9699 25.2503 25.9699 25.2567 25.9762 25.2503C25.7293 25.5163 25.476 25.7569 25.2038 26.0228C24.7922 26.4154 24.3743 26.8269 23.9818 27.2891C23.3422 27.973 22.5888 28.2959 21.601 28.2959C21.5061 28.2959 21.4047 28.2959 21.3098 28.2895C19.4293 28.1692 17.6817 27.4348 16.371 26.8079C12.7873 25.073 9.64044 22.61 7.02544 19.4885C4.86633 16.8861 3.4227 14.4801 2.46662 11.8968C1.87777 10.3202 1.66249 9.09182 1.75747 7.93311C1.82078 7.19231 2.10571 6.57813 2.63124 6.0526L4.79035 3.89349C5.10061 3.60223 5.42985 3.44394 5.75277 3.44394C6.15167 3.44394 6.47459 3.68454 6.6772 3.88715C6.68353 3.89349 6.68986 3.89982 6.6962 3.90615C7.08243 4.26706 7.44967 4.64063 7.8359 5.03953C8.03218 5.24214 8.2348 5.44475 8.43741 5.6537L10.166 7.38226C10.8371 8.05342 10.8371 8.67392 10.166 9.34509C9.98235 9.5287 9.80506 9.71232 9.62144 9.88961C9.08958 10.4341 8.58304 10.9407 8.03219 11.4345C8.01952 11.4472 8.00686 11.4535 8.00053 11.4662C7.456 12.0107 7.55731 12.5426 7.67128 12.9035C7.67761 12.9225 7.68394 12.9415 7.69027 12.9605C8.13982 14.0495 8.77299 15.0753 9.73541 16.2973L9.74175 16.3036C11.4893 18.4564 13.3318 20.1343 15.3643 21.4196C15.6239 21.5843 15.8898 21.7172 16.1431 21.8439C16.371 21.9578 16.5863 22.0655 16.7699 22.1795C16.7953 22.1921 16.8206 22.2111 16.8459 22.2238C17.0612 22.3314 17.2638 22.3821 17.4728 22.3821C17.9983 22.3821 18.3275 22.0528 18.4352 21.9452L20.6006 19.7797C20.8159 19.5645 21.1578 19.3049 21.5567 19.3049C21.9493 19.3049 22.2722 19.5518 22.4685 19.7671C22.4748 19.7734 22.4748 19.7734 22.4811 19.7797L25.9699 23.2685C26.6221 23.9143 26.6221 24.5792 25.9762 25.2503Z"
+                          fill="#EE0000"
+                        ></path>
+                        <path
+                          d="M16.2127 7.13708C17.8717 7.41568 19.3786 8.20081 20.5816 9.40383C21.7846 10.6069 22.5634 12.1138 22.8484 13.7727C22.918 14.1906 23.2789 14.4819 23.6905 14.4819C23.7411 14.4819 23.7855 14.4755 23.8361 14.4692C24.3047 14.3932 24.6149 13.95 24.5389 13.4815C24.197 11.4743 23.2473 9.64444 21.7973 8.19448C20.3474 6.74452 18.5175 5.79476 16.5103 5.45285C16.0418 5.37687 15.6049 5.68712 15.5226 6.14934C15.4403 6.61155 15.7442 7.0611 16.2127 7.13708Z"
+                          fill="#EE0000"
+                        ></path>
+                        <path
+                          d="M29.9652 13.2336C29.4016 9.92848 27.844 6.92092 25.4507 4.52754C23.0573 2.13415 20.0497 0.576553 16.7446 0.0130316C16.2823 -0.0692806 15.8455 0.247305 15.7631 0.709519C15.6872 1.17807 15.9974 1.61495 16.466 1.69727C19.4165 2.19747 22.1075 3.59678 24.2476 5.73056C26.3877 7.87068 27.7807 10.5617 28.2809 13.5122C28.3506 13.9301 28.7115 14.2214 29.123 14.2214C29.1737 14.2214 29.218 14.215 29.2687 14.2087C29.7309 14.1391 30.0475 13.6958 29.9652 13.2336Z"
+                          fill="#EE0000"
+                        ></path>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_86_3978">
+                          <rect width="30" height="30" fill="white"></rect>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                  <div class="call-info-text">
+                    <p>{Newslater?.single_footer_emergency_help_label}</p>
+                    <h3>
+                      <a
+                        href={Newslater?.phone_number.url}
+                        title={Newslater?.phone_number.title}
+                        aria-label={Newslater?.phone_number.title}
+                      >
+                        {Newslater?.phone_number.title}
+                      </a>
+                    </h3>
+                  </div>
+                </div>{" "}
+                <div class="call">
+                  <div class="icon">
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 30 30"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clip-path="url(#clip0_86_3991)">
+                        <path
+                          d="M29.8593 10.3115L25.5148 7.24279V2.76041C25.4713 2.31639 25.1292 1.96001 24.6873 1.89844H5.65467C5.21283 1.96008 4.8707 2.31639 4.82715 2.76041V7.20828L0.310313 10.3114C0.131398 10.4413 0.0180829 10.6428 0 10.8631V27.2408C0.0587364 27.6903 0.412475 28.0441 0.861974 28.1028H29.48C29.8593 28.1028 29.9972 27.6546 29.9972 27.2408V10.8631C29.9972 10.6562 30.0317 10.4493 29.8593 10.3115ZM25.5148 8.89778L28.4801 10.932L25.5148 13.1732V8.89778ZM6.20633 3.27762H24.1357V14.2421L15.171 21.0001L6.20626 14.2421V3.27762H6.20633ZM4.82715 8.86333V13.2078L1.86188 10.9321L4.82715 8.86333ZM1.37918 12.3457L11.0335 19.6554L1.37918 26.172V12.3457ZM3.03423 26.7237L12.2058 20.5519L14.6538 22.4138C14.7924 22.5209 14.9614 22.5813 15.1365 22.5861C15.2744 22.5861 15.3434 22.5172 15.4813 22.4138L18.0327 20.4484L27.3078 26.7237H3.03423ZM28.618 25.9307L19.1706 19.5864L28.618 12.3457V25.9307Z"
+                          fill="#EE0000"
+                        ></path>
+                        <path
+                          d="M9.65431 7.76004H12.7574C13.1383 7.76004 13.447 7.45131 13.447 7.07045C13.447 6.68959 13.1383 6.38086 12.7574 6.38086H9.65431C9.27345 6.38086 8.96472 6.68959 8.96472 7.07045C8.96472 7.45131 9.27345 7.76004 9.65431 7.76004Z"
+                          fill="#EE0000"
+                        ></path>
+                        <path
+                          d="M9.65431 10.8636H20.6878C21.0687 10.8636 21.3774 10.5548 21.3774 10.174C21.3774 9.7931 21.0687 9.48438 20.6878 9.48438H9.65431C9.27345 9.48438 8.96472 9.7931 8.96472 10.174C8.96472 10.5548 9.27345 10.8636 9.65431 10.8636Z"
+                          fill="#EE0000"
+                        ></path>
+                        <path
+                          d="M21.3773 13.2775C21.3773 12.8966 21.0686 12.5879 20.6877 12.5879H9.65431C9.27345 12.5879 8.96472 12.8966 8.96472 13.2775C8.96472 13.6583 9.27345 13.9671 9.65431 13.9671H20.6878C21.0686 13.9671 21.3773 13.6583 21.3773 13.2775Z"
+                          fill="#EE0000"
+                        ></path>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_86_3991">
+                          <rect width="30" height="30" fill="white"></rect>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                  <div class="call-info-text">
+                    <p>{Newslater?.single_footer_emergency_help_label}</p>
+                    <h3>
+                      {" "}
+                      <a href={Newslater?.email_address.url}>
+                      {Newslater?.email_address.title}{" "}
+                      </a>
+                    </h3>
+                  </div>
+                </div>{" "}
+              </div>
             </div>
           </div>
         </div>
