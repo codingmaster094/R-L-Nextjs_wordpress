@@ -2,7 +2,6 @@
 import { useEffect, useRef } from "react";
 
 const Testimonial_Caraousel = ({ AboutAllTestimonial }) => {
-  console.log("AboutAllTestimonial", AboutAllTestimonial);
   const carouselRef = useRef();
 
   useEffect(() => {
@@ -23,92 +22,63 @@ const Testimonial_Caraousel = ({ AboutAllTestimonial }) => {
             "https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js";
           owlCarouselJS.onload = () => {
             window.$ = window.jQuery;
-            jQuery(".pr-testimonal-boxs").owlCarousel({
-              stagePadding: 200,
-              margin: 20,
-              loop: true,
-              items: 1,
-              lazyLoad: true,
-              // autoplay: true,
-              // autoplaySpeed: 2000,
-              autoplayTimeout: 5000,
-              autoplayHoverPause: true,
-              nav: true,
-              dots: false,
-              responsive: {
-                0: {
-                  stagePadding: 10,
-                },
-                700: {
-                  stagePadding: 50,
-                },
-                991: {
-                  stagePadding: 100,
-                },
-                1100: {
-                  stagePadding: 150,
-                },
-                1280: {
-                  stagePadding: 200,
-                },
-              },
-            });
+            initializeCarousel();
           };
           document.body.appendChild(owlCarouselJS);
         };
         document.body.appendChild(jQueryScript);
       };
 
+      const initializeCarousel = () => {
+        if (carouselRef.current) {
+          jQuery(carouselRef.current).owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            },
+          });
+        }
+      };
+
       loadOwlCarousel();
+
+      // Cleanup function to destroy the carousel on unmount
+      return () => {
+        if (carouselRef.current) {
+          jQuery(carouselRef.current).trigger('destroy.owl.carousel');
+        }
+      };
     }
-  }, []);
+  }, [AboutAllTestimonial]);
+
   return (
     <div className="pr-testimonal-boxs owl-carousel" ref={carouselRef}>
-            <div className="pr-testimonal-box item">
-              <div className="pr-tes-img">
-                <div className="title">
-                  <h3>Marvin McKinney</h3>
-                  <p>Sr. Designer</p>
-                </div>
-              </div>
-              <div className="pr-tes-content">
-                <p>
-                  Ornare imperdiet fames natoque fermentum feugiat conubia
-                  turpis. Aenean elementum primis egestas natoque fusce.
-                </p>
-              </div>
-            </div>
-
-            <div className="pr-testimonal-box item">   
-              <div className="pr-tes-img">
-                <div className="title">
-                  <h3>Kathryn Murphy</h3>
-                  <p>Sr. Designer</p>
-                </div>
-              </div>
-              <div className="pr-tes-content">
-                <p>
-                  Ornare imperdiet fames natoque fermentum feugiat conubia
-                  turpis. Aenean elementum primis egestas natoque fusce.
-                </p>
-              </div>
-            </div>
-
-            <div className="pr-testimonal-box item">  
-              <div className="pr-tes-img">
-                <div className="title">
-                  <h3>Darrell Steward</h3>
-                  <p>Sr. Designer</p>
-                </div>
-              </div>
-              <div className="pr-tes-content">
-                <p>
-                  Ornare imperdiet fames natoque fermentum feugiat conubia
-                  turpis. Aenean elementum primis egestas natoque fusce.
-                </p>
-              </div>
+      {AboutAllTestimonial && AboutAllTestimonial.map((val, i) => (
+        <div className="pr-testimonal-box item" key={i}>
+          <div className="pr-tes-img">
+            <div className="title">
+              <h3>{val.about_testimonial_name}</h3>
+              <p>{val.about_testimonial_designation}</p>
             </div>
           </div>
+          <div className="pr-tes-content">
+            <p dangerouslySetInnerHTML={{ __html: val.about_testimonial_content
+                                    ?.replace(/<p>/g, "")
+                                    .replace(/<\/p>/g, "") }}></p>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 

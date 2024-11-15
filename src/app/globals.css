@@ -505,7 +505,9 @@ header .tel-info .mail a:hover {
   gap: 40px;
   margin-top: 40px;
 }
-
+.hero-img img:last-child {
+  max-height: 300px;
+}
 .hero-img {
   width: 45%;
   display: flex;
@@ -1744,6 +1746,7 @@ footer {
   -moz-transition: all 0.3s ease-in;
   -ms-transition: all 0.3s ease-in;
   -o-transition: all 0.3s ease-in;
+  height: 100%;
 }
 
 .pr-testimonal-box:hover {
@@ -2637,7 +2640,23 @@ span.wpcf7-not-valid-tip {
   flex-wrap: wrap;
   gap: 16px;
 }
-
+.pr-testimonal-boxs .owl-stage-outer {
+  padding: 0 2px;
+}
+.pr-testimonal-boxs .owl-stage {
+  display: flex;
+}
+/* 
+.owl-item{
+  width: 413.333px !important;
+    margin-right: 10px !important;
+} */
+/* 
+.owl-stage{
+    transform: translate3d(-2116px, 0px, 0px) !important;
+    transition: 0.25s !important;
+    width: 3810px !important;
+} */
 
 @media(max-width:1950px) {
   .ser-banner::after {

@@ -32,7 +32,7 @@ const HeroSection = ({
                 <div className="hero-title">
                 {
                   logo && 
-                  <Image src={logo} alt="title logo" width={50} height={50} />
+                  <img src={logo} alt="title logo"  />
                 }
                   <h1>{main_title}</h1>
                 </div>
