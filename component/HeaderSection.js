@@ -93,12 +93,12 @@ const Header = () => {
                 About US
                 <Image className="DownArrow" src={DownArrow} alt="DownArrow" />
               </Link>
-              <ul className="sub-menu">
+              <ul className="sub-menu"> 
                 <li>
-                  <Link href="/about">About</Link>
+                  <Link href="/about">About</Link> 
                 </li>
                 <li>
-                  <Link href="/industries">INDUSTRIES</Link>
+                  <Link href="/industries">INDUSTRIES</Link> 
                 </li>
                 <li>
                   <Link href="/faq">FAQ</Link>
