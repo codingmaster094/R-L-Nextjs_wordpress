@@ -15,6 +15,7 @@ const Page = () => {
   const [Newslater, setNewslater] = useState(null);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (
@@ -38,11 +39,14 @@ const Page = () => {
   useEffect(() => {
     const loadHomeData = async () => {
       try {
+        setIsLoading(true);
         const result = await fetchHomedata(slug);
         setabout(result.page_acf_fields);
         setNewslater(result.global_acf_options);
       } catch (err) {
         setError("Failed to load home page data.");
+      } finally {
+        setIsLoading(false); // Stop the loader
       }
     };
     loadHomeData();
@@ -54,6 +58,13 @@ const Page = () => {
 
   return (
     <>
+    {
+      isLoading && 
+      <div className="load-bar">
+        <div className="bar"></div>
+      </div>
+    }
+
       <HeroSection
         bg_image={about?.about_hero_background_image.url}
         main_title={about?.about_hero_main_title}

@@ -1,15 +1,15 @@
-"use client"
-import React, { useState , useEffect } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { fetchHomedata } from "../untils/Fetchdata";
-import Map from "../public/img/map.svg"
-import Call from "../public/img/header_call.svg"
-import Mail from "../public/img/header_mail.svg"
-import DownArrow from "../public/img/down_arrow.svg"
-import Request_btn from "../public/img/Request_btn.svg"
-import menu_icon from "../public/img/menu_icon.svg"
+import Map from "../public/img/map.svg";
+import Call from "../public/img/header_call.svg";
+import Mail from "../public/img/header_mail.svg";
+import DownArrow from "../public/img/down_arrow.svg";
+import Request_btn from "../public/img/Request_btn.svg";
+import menu_icon from "../public/img/menu_icon.svg";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,7 +22,7 @@ const Header = () => {
   useEffect(() => {
     const loadHomeData = async () => {
       try {
-        const result = await fetchHomedata(slug || 'home');
+        const result = await fetchHomedata(slug || "home");
         setNewslater(result.global_acf_options);
       } catch (err) {
         setError("Failed to load home page data.");
@@ -33,7 +33,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 40); 
+      setIsSticky(window.scrollY > 40);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -41,27 +41,27 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []); 
+  }, []);
 
   return (
     <header>
       <div className="navigtion">
         <div className="loction">
           <a href={Newslater?.address.url} target="_blank">
-          <Image src={Map} alt="map"/>
+            <Image src={Map} alt="map" />
             {Newslater?.address.title}
           </a>
         </div>
         <div className="tel-info">
           <div className="call">
             <a href={Newslater?.phone_number.url}>
-            <Image src={Call} alt="call"/>
-             {Newslater?.phone_number.title}
+              <Image src={Call} alt="call" />
+              {Newslater?.phone_number.title}
             </a>
           </div>
           <div className="mail">
             <a href={Newslater?.email_address.url}>
-            <Image src={Mail} alt="mail"/>
+              <Image src={Mail} alt="mail" />
               {Newslater?.email_address.title}
             </a>
           </div>
@@ -69,12 +69,16 @@ const Header = () => {
       </div>
       <div className={`h-wrapper ${isSticky ? "sticky" : ""}`}>
         <div className="logo">
-          <a href="/">
-          {
-            Newslater?.footer_logo.url &&
-            <Image src={Newslater?.footer_logo.url} width={150} height={100} alt="logo" />
-          }
-          </a>
+          <Link href="/">
+            {Newslater?.footer_logo.url && (
+              <Image
+                src={Newslater?.footer_logo.url}
+                width={150}
+                height={100}
+                alt="logo"
+              />
+            )}
+          </Link>
         </div>
         <nav className={menuOpen ? "open" : ""}>
           <ul>
@@ -82,14 +86,12 @@ const Header = () => {
               <Link href="./product">Product</Link>
             </li>
             <li>
-              <Link href="/services">
-                services
-              </Link>
+              <Link href="/services">services</Link>
             </li>
             <li>
-            <Link href="javascript:;;">
+              <Link href="">
                 About US
-                <Image className="DownArrow" src={DownArrow} alt="DownArrow"/>
+                <Image className="DownArrow" src={DownArrow} alt="DownArrow" />
               </Link>
               <ul className="sub-menu">
                 <li>
@@ -99,8 +101,8 @@ const Header = () => {
                   <Link href="/industries">INDUSTRIES</Link>
                 </li>
                 <li>
-                <Link href="/faq">FAQ</Link>
-              </li>
+                  <Link href="/faq">FAQ</Link>
+                </li>
               </ul>
             </li>
             {/* <li>
@@ -111,7 +113,7 @@ const Header = () => {
             </li>
           </ul>
           <div className="close-icon" onClick={() => setMenuOpen(false)}>
-          {/* <Image src={Request_btn} alt="Request_btn"/> */}
+            {/* <Image src={Request_btn} alt="Request_btn"/> */}
           </div>
         </nav>
         <div className="h-btn">
@@ -130,13 +132,16 @@ const Header = () => {
                 />
               </svg>
             </div> */}
-            <a href={Newslater?.newsletter_request_quote_button.url} className="btn">
-             {Newslater?.newsletter_request_quote_button.title}
-             <Image src={Request_btn} alt="Request_btn"/>
+            <a
+              href={Newslater?.newsletter_request_quote_button.url}
+              className="btn"
+            >
+              {Newslater?.newsletter_request_quote_button.title}
+              <Image src={Request_btn} alt="Request_btn" />
             </a>
           </div>
           <div className="menu-icon" onClick={toggleMenu}>
-          <Image src={menu_icon} alt="menu_icon"/>
+            <Image src={menu_icon} alt="menu_icon" />
           </div>
         </div>
       </div>

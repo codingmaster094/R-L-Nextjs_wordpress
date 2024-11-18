@@ -236,6 +236,42 @@ h6 span {
   font-weight: 700;
 }
 
+
+
+
+.load-bar {
+  position: fixed; /* Sticks to the viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Light black overlay */
+  z-index: 9999; /* Ensures it appears above other elements */
+  display: flex;
+  justify-content: center; /* Centers the loader horizontally */
+  align-items: center; /* Centers the loader vertically */
+}
+
+.load-bar .bar {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #fff; /* White border for the loader */
+  border-top: 5px solid var(--primary-color); /* Blue color for the rotating part */
+  border-radius: 50%; /* Circular shape */
+  animation: spin 1s linear infinite; /* Spinning animation */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
 header {
   position: relative;
 }
@@ -1124,6 +1160,7 @@ header .tel-info .mail a:hover {
 .f-fild-btn .btn {
   width: 100%;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .client-review {
@@ -2620,6 +2657,30 @@ section.news-letter.indeurtries-nl {
   position: absolute;
   top: 30px;
   right: 0;
+}
+
+.wpcf7-spinner {
+  visibility: hidden;
+  display: inline-block;
+  background-color: #23282d;
+  opacity: 0.75;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 100%;
+  padding: 0;
+  margin: 0 24px;
+  position: relative;
+}
+
+.wpcf7 form.invalid .wpcf7-response-output {
+  margin: 0 !important;
+  border-color: var(--primary-color) !important;
+}
+.wpcf7-response-output {
+  /* margin: 2em 0.5em 1em; */
+  padding: 0.2em 1em;
+  border: 2px solid #00a0d2;
 }
 
 .wpcf7-response-output {

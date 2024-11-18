@@ -10,15 +10,18 @@ const Page = () => {
   console.log("slug", slug);
   const [Privacy_policy, setPrivacy_policy] = useState(null);
   const [error, setError] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const loadHomeData = async () => {
       try {
+        setIsLoading(true);
         const result = await GetPrivacyPage(slug);
         console.log("result", result);
         setPrivacy_policy(result);
       } catch (err) {
         setError("Failed to load home page data.");
+      } finally {
+        setIsLoading(false); // Stop the loader
       }
     };
     loadHomeData();
@@ -26,8 +29,14 @@ const Page = () => {
 
   return (
     <>
+    {
+      isLoading && 
+    <div className="load-bar">
+      <div className="bar"></div>
+    </div>
+    }
       <section className="py privacy">
-      <Image src="https://rlpackaging.ca/wp-content/uploads/2024/09/privacy.png" alt="privacy" className="privacy-img"></Image>
+      <Image src="https://rlpackaging.ca/wp-content/uploads/2024/09/privacy.png" width={400} height={420} alt="privacy" className="privacy-img"></Image>
         <div className="container">
           <div className="privacy-content">
             <div class="title">

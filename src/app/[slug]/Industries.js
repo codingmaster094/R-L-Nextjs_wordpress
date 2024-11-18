@@ -13,15 +13,19 @@ const Page = () => {
   const [industries, setindustries] = useState(null);
   const [Newslater, setNewslater] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadHomeData = async () => {
       try {
+        setIsLoading(true);
         const result = await fetchHomedata(slug);
         setindustries(result.page_acf_fields);
         setNewslater(result.global_acf_options);
       } catch (err) {
         setError("Failed to load home page data.");
+      } finally {
+        setIsLoading(false); // Stop the loader
       }
     };
     loadHomeData();
@@ -32,7 +36,12 @@ const Page = () => {
   }
   return (
     <>
-
+{
+      isLoading && 
+    <div className="load-bar">
+      <div className="bar"></div>
+    </div>
+    }
 <HeroSection  
       bg_image={industries?.industries_banner_background_image}
       main_title={industries?.industries_banner_main_title}
@@ -107,7 +116,7 @@ const Page = () => {
         ))
       }
     </section>
-    <NewsletterSection  global_acf_options={Newslater} className={'indeurtries-nl'}/>
+    <NewsletterSection industries_newsletter_background_image={industries?.industries_newsletter_background_image.url} global_acf_options={Newslater} className={'indeurtries-nl'}/>
     </>
   )
 }

@@ -13,21 +13,31 @@ const Page = () => {
     const [ContactData, setContactData] = useState(null);
     const [Newslater, setNewslater] = useState(null);
     const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const loadHomeData = async () => {
           try {
+            setIsLoading(true);
             const result = await fetchHomedata(slug);
             setContactData(result.page_acf_fields);
             setNewslater(result.global_acf_options);
           } catch (err) {
             setError("Failed to load home page data.");
+        } finally {
+            setIsLoading(false); // Stop the loader
           }
         };
         loadHomeData();
       }, [slug]);
   return (
     <>
+    {
+      isLoading && 
+    <div className="load-bar">
+      <div className="bar"></div>
+    </div>
+    }
         <section className="contact-tab-form py">
             <div className="container">
                 <div className="tabs contact-tabs">

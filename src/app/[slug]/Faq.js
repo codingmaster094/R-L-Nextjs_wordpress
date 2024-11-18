@@ -12,7 +12,7 @@ const Page = () => {
   const [FAQ, setFAQ] = useState(null);
   const [error, setError] = useState(null);
   const [Newslater, setNewslater] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(true);
   const handleTabClick = (index) => {
     setActiveTabIndex(index);
   };
@@ -29,12 +29,15 @@ const Page = () => {
   useEffect(() => {
     const loadHomeData = async () => {
       try {
+        setIsLoading(true);
         const result = await fetchHomedata(slug);
         setFAQ(result.page_acf_fields);
         setfaqData1(result.page_acf_fields.faq_all_questions_answers)
         setNewslater(result.global_acf_options);
       } catch (err) {
         setError("Failed to load home page data.");
+      } finally {
+        setIsLoading(false); // Stop the loader
       }
     };
     loadHomeData();
@@ -46,6 +49,12 @@ const Page = () => {
 
   return (
     <>
+    {
+      isLoading && 
+    <div className="load-bar">
+      <div className="bar"></div>
+    </div>
+    }
     <HeroSection  
       bg_image={FAQ?.faq_hero_image.url}
       main_title={FAQ?.faq_hero_main_title}

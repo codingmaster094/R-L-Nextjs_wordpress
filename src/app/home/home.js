@@ -9,18 +9,22 @@ import SpecializationSection from '../../../component/SpecializationSection';
 import WorkProcessSection from '../../../component/WorkProcessSection';
 import { fetchHomedata } from "../../../untils/Fetchdata";
 const Page = () => {
-  const [homepage, sethomepage] = useState(null);
+  const [homepage, setHomepage] = useState(null);
   const [Newslater, setNewslater] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Track loading status
 
   useEffect(() => {
     const loadHomeData = async () => {
       try {
-        const result = await fetchHomedata('home');
-        sethomepage(result.page_acf_fields);
+        setIsLoading(true); // Start the loader
+        const result = await fetchHomedata("home");
+        setHomepage(result.page_acf_fields);
         setNewslater(result.global_acf_options);
       } catch (err) {
         setError("Failed to load home page data.");
+      } finally {
+        setIsLoading(false); // Stop the loader
       }
     };
     loadHomeData();
@@ -32,6 +36,13 @@ const Page = () => {
 
   return (
     <>
+    {
+      isLoading && 
+    <div className="load-bar">
+      <div className="bar"></div>
+    </div>
+    }
+
     <HeroSection  
     bg_image={homepage?.home_hero_banner_background_image}
     logo={homepage?.home_hero_banner_logo.url}
@@ -71,7 +82,6 @@ const Page = () => {
     <ContactFormSection 
       main_title={homepage?.home_get_in_touch_form_main_title}
       sub_title={homepage?.home_get_in_touch_form_sub_title}
-      home_get_in_touch_form_shortcode={homepage?.home_get_in_touch_form_shortcode.post_content}
       home_get_in_touch_title={homepage?.home_get_in_touch_title}
       content={homepage?.home_get_in_touch_content}
       home_get_in_touch_client_detail_group={homepage?.home_get_in_touch_client_detail_group}
