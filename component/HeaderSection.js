@@ -4,12 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { fetchHomedata } from "../untils/Fetchdata";
+import Logo from "../public/img/logo.png";
 import Map from "../public/img/map.svg";
 import Call from "../public/img/header_call.svg";
 import Mail from "../public/img/header_mail.svg";
 import DownArrow from "../public/img/down_arrow.svg";
 import Request_btn from "../public/img/Request_btn.svg";
 import menu_icon from "../public/img/menu_icon.svg";
+import close_menu from "../public/img/close_menu.svg";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -70,38 +72,51 @@ const Header = () => {
       <div className={`h-wrapper ${isSticky ? "sticky" : ""}`}>
         <div className="logo">
           <Link href="/">
-            {Newslater?.footer_logo.url && (
-              <Image
+          {
+            Newslater?.footer_logo.url ? 
+            <Image
                 src={Newslater?.footer_logo.url}
                 width={150}
                 height={100}
                 alt="logo"
               />
-            )}
+              :
+              <Image
+                src={Logo}
+                width={150}
+                height={100}
+                alt="logo"
+              />
+          }
           </Link>
         </div>
         <nav className={menuOpen ? "open" : ""}>
           <ul>
             <li>
-              <Link href="./product">Product</Link>
+              <Link href="./product" onClick={() => setMenuOpen(false)}>Product</Link>
             </li>
             <li>
-              <Link href="/services">services</Link>
+              <Link href="/services" onClick={() => setMenuOpen(false)}>services</Link>
             </li>
             <li>
-              <Link href="">
+              <Link 
+               href="#"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent the redirect
+                }}
+                >
                 About US
                 <Image className="DownArrow" src={DownArrow} alt="DownArrow" />
               </Link>
               <ul className="sub-menu"> 
                 <li>
-                  <Link href="/about">About</Link> 
+                  <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link> 
                 </li>
                 <li>
-                  <Link href="/industries">INDUSTRIES</Link> 
+                  <Link href="/industries" onClick={() => setMenuOpen(false)}>INDUSTRIES</Link> 
                 </li>
                 <li>
-                  <Link href="/faq">FAQ</Link>
+                  <Link href="/faq" onClick={() => setMenuOpen(false)}>FAQ</Link>
                 </li>
               </ul>
             </li>
@@ -109,11 +124,11 @@ const Header = () => {
               <a href="#">blog</a>
             </li> */}
             <li>
-              <Link href="/contact">contact</Link>
+              <Link href="/contact" onClick={() => setMenuOpen(false)}>contact</Link>
             </li>
           </ul>
           <div className="close-icon" onClick={() => setMenuOpen(false)}>
-            {/* <Image src={Request_btn} alt="Request_btn"/> */}
+            <Image src={close_menu} alt="close_menu"/>
           </div>
         </nav>
         <div className="h-btn">

@@ -3,6 +3,7 @@ import Header from "../../component/HeaderSection";
 import "./globals.css";
 import "./fonts/font.css"
 import TopButton from "../../component/TopButton";
+import Cookies from "../../component/Cookies";
 
 export default function RootLayout({ children }) {
   return (
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
        <Header/>
         <main>{children}</main>
         <TopButton/>
+        <Cookies/>
         <Footer />
       </body>
     </html>
