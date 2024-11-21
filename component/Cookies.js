@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import Image from "next/image";
+import revisit from "../public/img/revisit.svg"
 
 const accordionData = [
   {
@@ -85,12 +87,12 @@ const CookiesComponent = () => {
         <button
           className="cky-btn-revisit"
           aria-label="Consent Preferences"
-          onClick={() => setIsVisible(true)}
+          onClick={() => {setIsVisible(true) ; setIsPreferencesVisible(true)}}
         >
-          {/* <img
-            src="https://rlpackaging.ca/wp-content/plugins/cookie-law-info/lite/frontend/images/revisit.svg"
+          <Image
+            src={revisit}
             alt="Revisit consent button"
-          /> */}
+          />
         </button>
       </div>
       {
