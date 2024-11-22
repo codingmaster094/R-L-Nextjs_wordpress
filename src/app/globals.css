@@ -477,7 +477,7 @@ header .tel-info .mail a:hover {
   gap: 48px;
 }
 
-.search-btn img{
+.search-btn img , .Newslater_image{
   width:24px;
  height:24px;
 }
@@ -1276,7 +1276,7 @@ header .tel-info .mail a:hover {
 
 .notification-email {
   width: 40%;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: flex-end;
   padding: 64px 64px 64px 0;
@@ -2586,6 +2586,7 @@ section.news-letter.indeurtries-nl {
 }
 
 #back-to-top {
+  z-index: 0 !important;
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -2599,7 +2600,7 @@ section.news-letter.indeurtries-nl {
   border-radius: 50%;
   border: 0;
   transition: background-color 350ms ease-in-out;
-  z-index: 990;
+  z-index: 0;
   -webkit-transition: background-color 350ms ease-in-out;
   -moz-transition: background-color 350ms ease-in-out;
   -ms-transition: background-color 350ms ease-in-out;
@@ -2660,7 +2661,7 @@ section.news-letter.indeurtries-nl {
 }
 
 .wpcf7-spinner {
-  visibility: hidden;
+  /* visibility: hidden; */
   display: inline-block;
   background-color: #23282d;
   opacity: 0.75;
@@ -2673,6 +2674,25 @@ section.news-letter.indeurtries-nl {
   position: relative;
 }
 
+.wpcf7-spinner::before {
+  content: '';
+  position: absolute;
+  background-color: #fbfbfc;
+  top: 4px;
+  left: 4px;
+  width: 6px;
+  height: 6px;
+  border: none;
+  border-radius: 100%;
+  transform-origin: 8px 8px;
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+
+
 .wpcf7 form.invalid .wpcf7-response-output {
   margin: 0 !important;
   border-color: var(--primary-color) !important;
@@ -2683,9 +2703,23 @@ section.news-letter.indeurtries-nl {
   border: 2px solid #00a0d2;
 }
 
-.wpcf7-response-output {
+.wpcf7-response-output-error {
+  padding: 0.2em 1em;
   margin: 0 !important;
-  border-color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+}
+.wpcf7-response-output-success {
+  padding: 0.2em 1em;
+  margin: 0 !important;
+  border: 1px solid green !important;
+}
+
+.wpcf7-not-valid-tip {
+  color: #dc3232;
+  font-size: 1em;
+  font-weight: normal;
+  display: block;
+  color:red;
 }
 
 span.wpcf7-not-valid-tip {
@@ -2693,6 +2727,11 @@ span.wpcf7-not-valid-tip {
   display: block;
 }
 
+.wpcf7-not-valid-tip{
+  color: #dc3232;
+    font-size: 1em;
+    font-weight: normal;
+}
 .contact-banner {
   padding: 200px 0 100px;
   background-image: url(../../public/img/hero-bg.png);
@@ -2829,7 +2868,7 @@ span.wpcf7-not-valid-tip {
 .cookie-consent-bar {
   background: #ffffff;
   border: 1px solid #acabab;
-  padding: 16.5px 24px;
+  padding: 29.5px 24px;
   box-shadow: 0 -1px 10px 0 #acabab4d;
   position: relative;
 }
@@ -2852,7 +2891,7 @@ span.wpcf7-not-valid-tip {
 .consent-right:after{
   position: absolute;
   content: "";
-  width: 50%;
+  width: 43.9%;
   height: 100%;
   background: linear-gradient(239deg, #ee0000 0%, #ee0000 20%, #ee0000 90%, transparent 0%) 50% / 100% 100% no-repeat;
   z-index: 0;
@@ -3134,13 +3173,23 @@ button.cky-show-desc-btn:not(:hover):not(:active) {
 /* .cky-preference-wrapper {
   display: none;
 } */
-.cookie-main {
+.cookie {
   width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
   position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+}
+.cookie-main {
+  position: fixed;
+  width: 100%;
   bottom: 0;
   left: 0;
-  z-index: 999;
+  z-index: 999; 
 }
+
 .cky-btn-revisit-wrapper {
   display: flex;
   align-items: center;
@@ -3401,7 +3450,10 @@ button.cky-accordion-btn:not(:hover):not(:active), button.cky-banner-btn-close:n
   .notification-email {
       padding: 30px 30px 30px 0;
   }
-
+.Newslater_image{
+  width:22px;
+  height:22px
+}
   .expriness-box {
       width: calc(33.33% - 16px);
   }

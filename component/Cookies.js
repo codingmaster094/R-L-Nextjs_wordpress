@@ -92,7 +92,7 @@ const CookiesComponent = () => {
           <Image
             src={revisit}
             alt="Revisit consent button"
-          />
+          />  
         </button>
       </div>
       {
