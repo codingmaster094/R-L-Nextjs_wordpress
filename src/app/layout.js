@@ -9,9 +9,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-     <head>
-     {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" /> */}
-     </head>
       <body>
        <Header/>
         <main>{children}</main>
