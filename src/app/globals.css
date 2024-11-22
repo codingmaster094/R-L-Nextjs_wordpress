@@ -3199,7 +3199,7 @@ button.cky-show-desc-btn:not(:hover):not(:active) {
   height: 45px;
   border-radius: 50%;
   position: fixed;
-  z-index:0;
+  z-index:999 !important;
   cursor: pointer;
 }
 .cky-revisit-bottom-left {
