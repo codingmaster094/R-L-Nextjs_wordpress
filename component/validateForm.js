@@ -8,7 +8,6 @@ const validateForm = () => {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(formData.email)) {
       errors.email = "Please enter a valid email address.";
     }
-    console.log("Validation Errors:", errors); // Debugging line
     return errors;
   };
   

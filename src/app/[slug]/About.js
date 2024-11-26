@@ -9,6 +9,7 @@ import Request_icon from "../../../public/img/Request_btn.svg"
 import location from "../../../public/img/location.svg"
 import Call from "../../../public/img/contact_call.svg"
 import Mail from "../../../public/img/contact_mail.svg"
+import ContactForm from './../../../component/ContactForm';
 
 const Page = () => {
   const [about, setabout] = useState(null);
@@ -337,118 +338,7 @@ const Page = () => {
                   <p role="status" aria-live="polite" aria-atomic="true"></p>{" "}
                   <ul></ul>
                 </div>
-                <form
-                  action="/about/#wpcf7-f702-o1"
-                  method="post"
-                  class="wpcf7-form init"
-                  aria-label="Contact form"
-                  novalidate="novalidate"
-                  data-status="init"
-                >
-                  <div style={{display: 'none'}}>
-                    <input type="hidden" name="_wpcf7" value="702" />
-                    <input type="hidden" name="_wpcf7_version" value="5.9.8" />
-                    <input type="hidden" name="_wpcf7_locale" value="en_US" />
-                    <input
-                      type="hidden"
-                      name="_wpcf7_unit_tag"
-                      value="wpcf7-f702-o1"
-                    />
-                    <input
-                      type="hidden"
-                      name="_wpcf7_container_post"
-                      value="0"
-                    />
-                    <input
-                      type="hidden"
-                      name="_wpcf7_posted_data_hash"
-                      value=""
-                    />
-                  </div>
-                  <div class="f-fild">
-                    <p>
-                      <span
-                        class="wpcf7-form-control-wrap"
-                        data-name="your-name"
-                      >
-                        <input
-                          size="40"
-                          maxlength="400"
-                          class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
-                          aria-required="true"
-                          aria-invalid="false"
-                          placeholder="Name"
-                          value=""
-                          type="text"
-                          name="your-name"
-                        />
-                      </span>
-                    </p>
-                  </div>
-                  <div class="f-fild">
-                    <p>
-                      <span
-                        class="wpcf7-form-control-wrap"
-                        data-name="your-email"
-                      >
-                        <input
-                          size="40"
-                          maxlength="400"
-                          class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email"
-                          aria-required="true"
-                          aria-invalid="false"
-                          placeholder="Email Address"
-                          value=""
-                          type="email"
-                          name="your-email"
-                        />
-                      </span>
-                    </p>
-                  </div>
-                  <div class="f-fild">
-                    <p>
-                      <span class="wpcf7-form-control-wrap" data-name="phone">
-                        <input
-                          size="40"
-                          maxlength="400"
-                          class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel"
-                          aria-required="true"
-                          aria-invalid="false"
-                          placeholder="Phone number"
-                          value=""
-                          type="tel"
-                          name="phone"
-                        />
-                      </span>
-                    </p>
-                  </div>
-                  <div class="f-fild">
-                    <p>
-                      <span class="wpcf7-form-control-wrap" data-name="message">
-                        <textarea
-                          cols="40"
-                          rows="4"
-                          maxlength="2000"
-                          class="wpcf7-form-control wpcf7-textarea"
-                          aria-invalid="false"
-                          placeholder="Message"
-                          name="message"
-                        ></textarea>
-                      </span>
-                    </p>
-                  </div>
-                  <div class="f-fild-btn">
-                    <p>
-                      <input
-                        class="wpcf7-form-control wpcf7-submit has-spinner btn"
-                        type="submit"
-                        value="Request Now"
-                      />
-                      <span class="wpcf7-spinner"></span>
-                    </p>
-                  </div>
-                  <div class="wpcf7-response-output" aria-hidden="true"></div>
-                </form>
+               <ContactForm/>
               </div>
             </div>
             <div class="pr-form-map">
@@ -504,3 +394,23 @@ const Page = () => {
 };
 
 export default Page;
+
+
+
+export async function generateMetadata() {
+  return {
+    title: "EAS Corporation – Intelligente Lösungen für Unternehmen und Industrien",
+    description: "EAS Corporation bietet innovative Lösungen im Bereich Technologie und Industrie. Von Beratung bis zur Umsetzung – Ihr Partner für maßgeschneiderte, zukunftssichere Lösungen.",
+    openGraph: {
+      title: "EAS Corporation – Intelligente Lösungen für Unternehmen und Industrien",
+      description: "EAS Corporation bietet innovative Lösungen im Bereich Technologie und Industrie. Von Beratung bis zur Umsetzung – Ihr Partner für maßgeschneiderte, zukunftssichere Lösungen.",
+      images: [
+        {
+          url: "../public/img/logo.png", 
+          alt: "EAS Corporation Logo",
+          description: "Logo der EAS Corporation, einem führenden Anbieter von technologischen Lösungen für Unternehmen."
+        }
+      ],
+    },
+  };
+}

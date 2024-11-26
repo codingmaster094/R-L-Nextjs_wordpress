@@ -131,7 +131,7 @@ const Page = () => {
         </div>
       </div>
     </section>
-      <NewsletterSection global_acf_options={Newslater}/>
+      <NewsletterSection industries_newsletter_background_image={FAQ?.faq_newsletter_background_image.url} global_acf_options={Newslater}/>
     </>
   );
 };

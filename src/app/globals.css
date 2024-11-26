@@ -313,7 +313,7 @@ header {
 }
 
 .h-wrapper .DownArrow{
-width:20px;
+width:7px;
 /* height:4px; */
 }
 .h-wrapper.sticky {
@@ -477,9 +477,14 @@ header .tel-info .mail a:hover {
   gap: 48px;
 }
 
-.search-btn img , .Newslater_image{
+.search-btn img , .Newslater_image , .service_newslater{
   width:24px;
  height:24px;
+}
+
+.service_newslater_hovered:hover{
+  color:white;
+  border-color:white;
 }
 .h-btn .search {
   position: relative;
@@ -765,7 +770,7 @@ header .tel-info .mail a:hover {
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 1px ;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2586,7 +2591,7 @@ section.news-letter.indeurtries-nl {
 }
 
 #back-to-top {
-  z-index: 0 !important;
+  z-index: 2px !important;
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -2660,6 +2665,11 @@ section.news-letter.indeurtries-nl {
   right: 0;
 }
 
+.error-message {
+  color: red;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
 .wpcf7-spinner {
   /* visibility: hidden; */
   display: inline-block;
@@ -2671,7 +2681,11 @@ section.news-letter.indeurtries-nl {
   border-radius: 100%;
   padding: 0;
   margin: 0 24px;
-  position: relative;
+  /* position: relative; */
+}
+
+.wpcf7-spinner.visible {
+  visibility: visible;
 }
 
 .wpcf7-spinner::before {
@@ -2685,13 +2699,18 @@ section.news-letter.indeurtries-nl {
   border: none;
   border-radius: 100%;
   transform-origin: 8px 8px;
-  animation-name: spin;
-  animation-duration: 1000ms;
+  /* animation-name: spin; */
+  /* animation-duration: 1000ms; */
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 
-
+@media (prefers-reduced-motion: reduce) {
+  .wpcf7-spinner::before {
+      animation-name: blink;
+      animation-duration: 2000ms;
+  }
+}
 
 .wpcf7 form.invalid .wpcf7-response-output {
   margin: 0 !important;

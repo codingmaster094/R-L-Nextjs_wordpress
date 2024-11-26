@@ -7,7 +7,6 @@ import Image from "next/image";
 const Page = () => {
   const router = useParams();
   const slug = router.slug;
-  console.log("slug", slug);
   const [Privacy_policy, setPrivacy_policy] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +15,6 @@ const Page = () => {
       try {
         setIsLoading(true);
         const result = await GetPrivacyPage(slug);
-        console.log("result", result);
         setPrivacy_policy(result);
       } catch (err) {
         setError("Failed to load home page data.");

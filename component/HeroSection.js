@@ -130,6 +130,8 @@ const HeroSection = ({
                 <div className="sub-title">
                   <p>{placeholder_title}</p>
                 </div>
+                {
+                  sub_title && 
                 <div className="tag">
                   <div className="tag-a">
                     <div className="box"></div>
@@ -138,6 +140,7 @@ const HeroSection = ({
                   </div>
                   <span>{sub_title}</span>
                 </div>
+                }
                 <h1>{main_title}</h1>
                 <div className="text">
                   <p
