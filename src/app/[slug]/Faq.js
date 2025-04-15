@@ -1,18 +1,13 @@
 "use client"
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NewsletterSection from '../../../component/NewsletterSection';
 import HeroSection from "../../../component/HeroSection";
-import { useParams } from "next/navigation";
-import { fetchHomedata } from "../../../untils/Fetchdata";
 
-const Page = () => {
+
+const Page = ({Data , Newslater}) => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeFAQ, setActiveFAQ] = useState(null);
   const [faqData1, setfaqData1] = useState(null);
-  const [FAQ, setFAQ] = useState(null);
-  const [error, setError] = useState(null);
-  const [Newslater, setNewslater] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   const handleTabClick = (index) => {
     setActiveTabIndex(index);
   };
@@ -21,46 +16,16 @@ const Page = () => {
     setActiveFAQ(activeFAQ === idx ? null : idx);
   };
 
-  const router = useParams();
-  const slug = router.slug;
 
-
-
-  useEffect(() => {
-    const loadHomeData = async () => {
-      try {
-        setIsLoading(true);
-        const result = await fetchHomedata(slug);
-        setFAQ(result.page_acf_fields);
-        setfaqData1(result.page_acf_fields.faq_all_questions_answers)
-        setNewslater(result.global_acf_options);
-      } catch (err) {
-        setError("Failed to load home page data.");
-      } finally {
-        setIsLoading(false); // Stop the loader
-      }
-    };
-    loadHomeData();
-  }, [slug]);
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
+  
   return (
     <>
-    {
-      isLoading && 
-    <div className="load-bar">
-      <div className="bar"></div>
-    </div>
-    }
     <HeroSection  
-      bg_image={FAQ?.faq_hero_image.url}
-      main_title={FAQ?.faq_hero_main_title}
-      sub_title={FAQ?.faq_hero_sub_title}
-      content={FAQ?.product_hero_content}
-      placeholder_title={FAQ?.faq_hero_placeholder_title}
+      bg_image={Data?.faq_hero_image.url}
+      main_title={Data?.faq_hero_main_title}
+      sub_title={Data?.faq_hero_sub_title}
+      content={Data?.product_hero_content}
+      placeholder_title={Data?.faq_hero_placeholder_title}
     />
 
 <section className="faq-tabs-section py">
@@ -131,7 +96,7 @@ const Page = () => {
         </div>
       </div>
     </section>
-      <NewsletterSection industries_newsletter_background_image={FAQ?.faq_newsletter_background_image.url} global_acf_options={Newslater}/>
+      <NewsletterSection industries_newsletter_background_image={Data?.faq_newsletter_background_image.url} global_acf_options={Newslater}/>
     </>
   );
 };

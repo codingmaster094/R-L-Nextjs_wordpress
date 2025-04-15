@@ -1,61 +1,25 @@
-"use client"
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import NewsletterSection from '../../../component/NewsletterSection';
 import HeroSection from "../../../component/HeroSection";
-import { useParams } from "next/navigation";
-import { fetchHomedata } from "../../../untils/Fetchdata";
 
-const Page = () => {
-  const router = useParams();
-  const slug = router.slug;
-
-  const [industries, setindustries] = useState(null);
-  const [Newslater, setNewslater] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const loadHomeData = async () => {
-      try {
-        setIsLoading(true);
-        const result = await fetchHomedata(slug);
-        setindustries(result.page_acf_fields);
-        setNewslater(result.global_acf_options);
-      } catch (err) {
-        setError("Failed to load home page data.");
-      } finally {
-        setIsLoading(false); // Stop the loader
-      }
-    };
-    loadHomeData();
-  }, [slug]);
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+const Page = async({Data , Newslater}) => {
   return (
     <>
-{
-      isLoading && 
-    <div className="load-bar">
-      <div className="bar"></div>
-    </div>
-    }
 <HeroSection  
-      bg_image={industries?.industries_banner_background_image}
-      main_title={industries?.industries_banner_main_title}
-      sub_title={industries?.industries_banner_sub_title}
-      content={industries?.product_hero_content}
-      placeholder_title={industries?.industries_banner_placeholder_title}
+      bg_image={Data?.industries_banner_background_image}
+      main_title={Data?.industries_banner_main_title}
+      sub_title={Data?.industries_banner_sub_title}
+      content={Data?.product_hero_content}
+      placeholder_title={Data?.industries_banner_placeholder_title}
     />
 
   <section className="industries py py-b" style={{ backgroundImage: 'url(/img/work-process.png)' }}>
       <div className="container">
         <div className="indurtries-boxs">
         {
-          industries?.industries_services &&
-          industries?.industries_services.map((val,i)=> (
+          Data?.industries_services &&
+          Data?.industries_services.map((val,i)=> (
             <a href="#e-commerice" className="indurtries-box" key={i}>
             <div className="indurtries-box-b">
               <Image src={val?.industries_services_icon.url} alt="e-commerce" width={100} height={100} />
@@ -80,7 +44,7 @@ const Page = () => {
               <div className="box"></div>
               <div className="box"></div>
             </div>
-            <span>{industries?.industries_service_sub_title}</span>
+            <span>{Data?.industries_service_sub_title}</span>
             <div className="tag-b">
               <div className="box"></div>
               <div className="box"></div>
@@ -89,14 +53,14 @@ const Page = () => {
           </div>
           
           <h2 dangerouslySetInnerHTML={{
-            __html: industries?.industries_service_main_title}}></h2>
+            __html: Data?.industries_service_main_title}}></h2>
         </div>
       </div>
 
       {/* E-commerce */}
       {
-        industries?.industries_services &&
-        industries?.industries_services.map((val,i)=> (
+        Data?.industries_services &&
+        Data?.industries_services.map((val,i)=> (
           <div id="e-commerice" className="service-wrapper py" key={i}>
         <div className="container">
           <div className="service-wrapper-box">
@@ -116,7 +80,7 @@ const Page = () => {
         ))
       }
     </section>
-    <NewsletterSection industries_newsletter_background_image={industries?.industries_newsletter_background_image.url} global_acf_options={Newslater} className={'indeurtries-nl'}/>
+    <NewsletterSection industries_newsletter_background_image={Data?.industries_newsletter_background_image.url} global_acf_options={Newslater} className={'indeurtries-nl'}/>
     </>
   )
 }

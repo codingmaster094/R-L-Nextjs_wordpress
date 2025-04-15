@@ -1,7 +1,8 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import infoDesk from "../public/img/infidesk.svg"
+import infoDesk from "../public/img/infidesk.svg";
 const HeroSection = ({
   bg_image,
   logo,
@@ -23,17 +24,14 @@ const HeroSection = ({
 
   return (
     <>
-    {slug === undefined && (
+      {slug === undefined && (
         <section className="hero">
           <div className="container">
             <div className="hero-wrapper">
               <div className="hero-text">
                 <span>{sub_title}</span>
                 <div className="hero-title">
-                {
-                  logo && 
-                  <img src={logo} alt="title logo"  />
-                }
+                  {logo && <img src={logo} alt="title logo" />}
                   <h1>{main_title}</h1>
                 </div>
                 <p
@@ -42,19 +40,17 @@ const HeroSection = ({
                   }}
                 />
                 <div className="hero-btn">
-                {
-                  (button1_url && button2_url) && 
-                  <>
-
-                  <a href={button1_url} className="btn" target="_blank">
-                    {button1_title}
-                    <Image src={infoDesk} alt="infoDesk icon"/>
-                  </a>
-                  <a href={button2_url} className="btn-b" target="_blank">
-                    {button2_title}
-                  </a>
-                  </>
-                }
+                  {button1_url && button2_url && (
+                    <>
+                      <a href={button1_url} className="btn" target="_blank">
+                        {button1_title}
+                        <Image src={infoDesk} alt="infoDesk icon" />
+                      </a>
+                      <a href={button2_url} className="btn-b" target="_blank">
+                        {button2_title}
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
               <div className="hero-img">
@@ -87,22 +83,21 @@ const HeroSection = ({
                 <p>{placeholder_title}</p>
               </div>
               <div className="tag">
-              {
-                sub_title &&
-                <>
-                <div className="tag-a">
-                  <div className="box"></div>
-                  <div className="box"></div>
-                  <div className="box"></div>
-                </div>
-                <span>{sub_title}</span>
-                <div className="tag-b">
-                  <div className="box"></div>
-                  <div className="box"></div>
-                  <div className="box"></div>
-                </div>
-                </>
-              }
+                {sub_title && (
+                  <>
+                    <div className="tag-a">
+                      <div className="box"></div>
+                      <div className="box"></div>
+                      <div className="box"></div>
+                    </div>
+                    <span>{sub_title}</span>
+                    <div className="tag-b">
+                      <div className="box"></div>
+                      <div className="box"></div>
+                      <div className="box"></div>
+                    </div>
+                  </>
+                )}
               </div>
               <h1>{main_title}</h1>
               <div className="sub-text">
@@ -130,17 +125,16 @@ const HeroSection = ({
                 <div className="sub-title">
                   <p>{placeholder_title}</p>
                 </div>
-                {
-                  sub_title && 
-                <div className="tag">
-                  <div className="tag-a">
-                    <div className="box"></div>
-                    <div className="box"></div>
-                    <div className="box"></div>
+                {sub_title && (
+                  <div className="tag">
+                    <div className="tag-a">
+                      <div className="box"></div>
+                      <div className="box"></div>
+                      <div className="box"></div>
+                    </div>
+                    <span>{sub_title}</span>
                   </div>
-                  <span>{sub_title}</span>
-                </div>
-                }
+                )}
                 <h1>{main_title}</h1>
                 <div className="text">
                   <p
@@ -245,7 +239,7 @@ const HeroSection = ({
                 </div>
               ))}
             </div>
-            <div class="about-bg-box">
+            <div className="about-bg-box">
               {about_hero_box_center_image && (
                 <Image
                   src={about_hero_box_center_image.url}
@@ -373,7 +367,6 @@ const HeroSection = ({
           </div>
         </section>
       )}
-
     </>
   );
 };

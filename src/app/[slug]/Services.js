@@ -1,63 +1,29 @@
-"use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import NewsletterSection from "../../../component/NewsletterSection";
-import { useParams } from "next/navigation";
-import { fetchHomedata } from "../../../untils/Fetchdata";
 import HeroSection from "../../../component/HeroSection";
-const Page = () => {
-  const router = useParams();
-  const slug = router.slug;
-
-  const [Services, setServices] = useState(null);
-  const [Newslater, setNewslater] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const loadHomeData = async () => {
-      try {
-        setIsLoading(true);
-        const result = await fetchHomedata(slug);
-        setServices(result.page_acf_fields);
-        setNewslater(result.global_acf_options);
-      } catch (err) {
-        setError("Failed to load home page data.");
-      } finally {
-        setIsLoading(false); // Stop the loader
-      }
-    };
-    loadHomeData();
-  }, [slug]);
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+const Page = async ({ Data, Newslater }) => {
   return (
     <>
-      {isLoading && (
-        <div className="load-bar">
-          <div className="bar"></div>
-        </div>
-      )}
       <HeroSection
-        bg_image={Services?.services_hero_background_image.url}
-        main_title={Services?.services_hero_main_title}
-        sub_title={Services?.services_hero_sub_title}
-        content={Services?.services_hero_content}
-        placeholder_title={Services?.services_hero_placeholder_title}
+        bg_image={Data?.services_hero_background_image.url}
+        main_title={Data?.services_hero_main_title}
+        sub_title={Data?.services_hero_sub_title}
+        content={Data?.services_hero_content}
+        placeholder_title={Data?.services_hero_placeholder_title}
       />
 
       <section className="service-pg">
         <div className="container">
           <div className="service-title py py-b">
-            {Services?.service_section_sub_title && (
+            {Data?.service_section_sub_title && (
               <div className="tag">
                 <div className="tag-a">
                   <div className="box"></div>
                   <div className="box"></div>
                   <div className="box"></div>
                 </div>
-                <span>{Services?.service_section_sub_title}</span>
+                <span>{Data?.service_section_sub_title}</span>
                 <div className="tag-b">
                   <div className="box"></div>
                   <div className="box"></div>
@@ -67,18 +33,18 @@ const Page = () => {
             )}
             <h2
               dangerouslySetInnerHTML={{
-                __html: Services?.service_section_main_title,
+                __html: Data?.service_section_main_title,
               }}
             />
           </div>
         </div>
-        {Services?.service_section_details &&
-          Services?.service_section_details.map((item, i) => {
+        {Data?.service_section_details &&
+          Data?.service_section_details.map((item, i) => {
             return (
-              <div class="service-wrapper py" key={i}>
-                <div class="container">
-                  <div class="service-wrapper-box" >
-                    <div class="service-img">
+              <div className="service-wrapper py" key={i}>
+                <div className="container">
+                  <div className="service-wrapper-box">
+                    <div className="service-img">
                       <Image
                         src={item.service_section_details_image.url}
                         width={item.service_section_details_image.width}
@@ -86,9 +52,9 @@ const Page = () => {
                         alt={item.service_section_details_image.title}
                       />
                     </div>
-                    <div class="service-content">
+                    <div className="service-content">
                       <h3>{item.service_section_details_title}</h3>
-                      <div class="sub-text">
+                      <div className="sub-text">
                         <p
                           dangerouslySetInnerHTML={{
                             __html: item.service_section_details_content
@@ -107,7 +73,7 @@ const Page = () => {
 
       <NewsletterSection
         industries_newsletter_background_image={
-          Services?.services_newsletter_background_image.url
+          Data?.services_newsletter_background_image.url
         }
         global_acf_options={Newslater}
       />

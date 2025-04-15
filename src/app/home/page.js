@@ -1,5 +1,5 @@
-"use client";
-import React, { useState, useEffect } from "react";
+
+import React from "react";
 import ContactFormSection from '../../../component/ContactFormSection';
 import HeroSection from '../../../component/HeroSection';
 import NewsletterSection from '../../../component/NewsletterSection';
@@ -9,59 +9,24 @@ import SpecializationSection from '../../../component/SpecializationSection';
 import WorkProcessSection from '../../../component/WorkProcessSection';
 import { fetchHomedata } from "../../../untils/Fetchdata";
 
-// This function will generate the metadata for your page
-export async function generateMetadata() {
-  return {
-    title: "EAS Corporation – Intelligente Lösungen für Unternehmen und Industrien",
-    description: "EAS Corporation bietet innovative Lösungen im Bereich Technologie und Industrie. Von Beratung bis zur Umsetzung – Ihr Partner für maßgeschneiderte, zukunftssichere Lösungen.",
-    openGraph: {
-      title: "EAS Corporation – Intelligente Lösungen für Unternehmen und Industrien",
-      description: "EAS Corporation bietet innovative Lösungen im Bereich Technologie und Industrie. Von Beratung bis zur Umsetzung – Ihr Partner für maßgeschneiderte, zukunftssichere Lösungen.",
-      images: [
-        {
-          url: "/img/logo.png", // Ensure the path is correct
-          alt: "EAS Corporation Logo",
-          description: "Logo der EAS Corporation, einem führenden Anbieter von technologischen Lösungen für Unternehmen."
-        }
-      ],
-    },
-  };
-}
 
-export default function Page() {
-  const [homepage, setHomepage] = useState(null);
-  const [Newslater, setNewslater] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); 
 
-  useEffect(() => {
-    const loadHomeData = async () => {
-      try {
-        setIsLoading(true);
-        const result = await fetchHomedata("home");
-        setHomepage(result.page_acf_fields);
-        setNewslater(result.global_acf_options);
-      } catch (err) {
-        setError("Failed to load home page data.");
-      } finally {
-        setIsLoading(false); 
-      }
-    };
-    loadHomeData();
-  }, []);
+export default async function Page() {
+let homepage;
+let Newslater;
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+try {
+     const result =  await fetchHomedata("home");
+        homepage = result.page_acf_fields;
+        Newslater = result.global_acf_options;
+   } catch (error) {
+     console.error("Error fetching data:", error);
+     return <div>Error loading data.</div>;
+   }
 
+  
   return (
     <>
-      {isLoading && 
-        <div className="load-bar">
-          <div className="bar"></div>
-        </div>
-      }
-
       <HeroSection  
         bg_image={homepage?.home_hero_banner_background_image}
         logo={homepage?.home_hero_banner_logo.url}

@@ -66,15 +66,15 @@ const Footer = () => {
       <div className="copy-right">
         <div className="container">
           <div className="copy-right-wrapper">
-            <div class="copy-link">
+            <div className="copy-link">
               <p>
                 ©2024 <span>R&L Packaging</span>
               </p>
-              <div class="menu-footer-menu-1-container">
-                <ul id="menu-footer-menu-1" class="menu">
+              <div className="menu-footer-menu-1-container">
+                <ul id="menu-footer-menu-1" className="menu">
                   <li
                     id="menu-item-689"
-                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-3 current_page_item menu-item-689"
+                    className="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy current-menu-item page_item page-item-3 current_page_item menu-item-689"
                   >
                     <Link
                       rel="privacy-policy"
@@ -86,7 +86,7 @@ const Footer = () => {
                   </li>
                   <li
                     id="menu-item-690"
-                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-690"
+                    className="menu-item menu-item-type-custom menu-item-object-custom menu-item-690"
                   >
                     <a
                       target="_blank"
