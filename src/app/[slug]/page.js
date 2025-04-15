@@ -6,6 +6,7 @@ import About from "@/app/[slug]/About"
 import Industries from "@/app/[slug]/Industries"
 import Faq from "@/app/[slug]/Faq"   
 import Contact from "@/app/[slug]/Contact"    
+import Privacy_policy from "@/app/[slug]/Privacy_policy";    
 import  Home  from '@/app/home/page';
 import { fetchHomedata, GetPrivacyPage, GetProductsPost } from "../../../untils/Fetchdata";
 
@@ -15,7 +16,7 @@ const Page = async ({params}) => {
   let Data;
   let Newslater;
   let ProductsPost;
-  let Privacy_policy;
+  let Privacy_policy_data;
 
   try {
     const result = await fetchHomedata(slug);
@@ -23,7 +24,7 @@ const Page = async ({params}) => {
     const response_Privacy = await GetPrivacyPage(slug);
     Data = result.page_acf_fields;
     Newslater = result.global_acf_options;
-    Privacy_policy = response_Privacy;
+    Privacy_policy_data = response_Privacy;
     ProductsPost = response;
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -46,7 +47,7 @@ try {
  } else if (slug === "contact") {
    currentPage = <Contact slug={slug} Data={Data} Newslater={Newslater}/>
  } else if (slug === "privacy-policy") {
-   currentPage = <Privacy_policy PrivacypolicyData={Privacy_policy} />;
+   currentPage = <Privacy_policy Data={Privacy_policy_data} />;
  } else {
    currentPage = <Home slug={slug} />;
  }

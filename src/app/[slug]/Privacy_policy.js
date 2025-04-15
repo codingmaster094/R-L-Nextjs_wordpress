@@ -2,18 +2,11 @@
 import React from "react";
 import Image from "next/image";
 
-const Page = ({PrivacypolicyData}) => {
-  console.log('PrivacypolicyData', PrivacypolicyData)
+const Page = ({Data}) => {
   return (
     <>
-    {
-      isLoading && 
-    <div className="load-bar">
-      <div className="bar"></div>
-    </div>
-    }
       <section className="py privacy">
-      <Image src="https://rlpackaging.ca/wp-content/uploads/2024/09/privacy.png" width={400} height={420} alt="privacy" className="privacy-img"></Image>
+      <Image src="https://rlpackaging.ca/wp-content/uploads/2024/09/privacy.png" width={400} height={420} alt="privacy" className="privacy-img"/>
         <div className="container">
           <div className="privacy-content">
             <div className="title">
@@ -28,8 +21,8 @@ const Page = ({PrivacypolicyData}) => {
               <h1>Privacy Policy</h1>
             </div>
             {
-                PrivacypolicyData &&
-                PrivacypolicyData?.map((val,i) => (
+                Data &&
+                Data?.map((val,i) => (
                     <div key={i} className="privacy-sub-text py py-b" dangerouslySetInnerHTML={{
             __html: val.content?.rendered,
           }}></div>
